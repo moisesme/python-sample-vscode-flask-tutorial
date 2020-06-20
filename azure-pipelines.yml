@@ -43,7 +43,7 @@ steps:
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
-    testResultsFiles: 'junit/test-results.xml'
+    testResultsFiles: '**/test-*.xml'
     testRunTitle: 'Publish test results for Python $(python.version)'
 
 - task: PublishCodeCoverageResults@1
