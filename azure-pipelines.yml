@@ -37,7 +37,7 @@ steps:
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest -q test_test1.py
+    py.test test_test1.py
   displayName: 'Test with pytest'
 
 - task: PublishTestResults@2
@@ -51,4 +51,12 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+
+- task: TwineAuthenticate@0
+  inputs:
+    artifactFeed: 'NodeJS'
+    pythonUploadServiceConnection: 'https://pkgs.dev.azure.com/moisesmoreno/Node.JS/_packaging/NodeJS/pypi/simple/'
+
+- script: |
+    twine upload -r "NodeJS --config-file $(PYPIRC_PATH) /upload
 
