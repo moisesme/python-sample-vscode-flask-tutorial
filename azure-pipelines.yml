@@ -31,6 +31,10 @@ steps:
     python test_test1.py
   displayName: 'Install dependencies'
 
+- script: 
+    python -m pip install setuptools wheel
+  displayName: 'Install tools'
+
 - script: |
     pip install pytest pytest-azurepipelines
     python -m pytest 
