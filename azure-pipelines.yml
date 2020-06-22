@@ -50,7 +50,8 @@ steps:
     arguments: --world Venus
 
 - script: |
-    pip install pytest
+    pip install pytest pytest-custom_exit_code
     pytest --version
-    pytest test_test1.py
+    pytest --suppress-no-test-exit-code
   displayName: 'Test with pytest'
+
