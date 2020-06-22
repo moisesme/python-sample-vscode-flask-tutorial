@@ -63,7 +63,7 @@ steps:
   inputs:
     testResultsFiles: '**/test-results.xml'
     searchFolder: '$(Common.TestResultsDirectory)'
-    testRunTitle: 'Python Unit tests
+    testRunTitle: 'Python Unit tests'
 
 - task: PublishTestResults@2
   inputs:
