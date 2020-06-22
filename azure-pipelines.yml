@@ -55,7 +55,9 @@ steps:
     pytest --suppress-no-test-exit-code
   displayName: 'Test with pytest'
 
-- script: 'pip install pytest && pytest Tests/unit_tests --junitxml=../TestResults/test-results.xml && pip install pycmd && py.cleanup Tests/'
+- script: |
+    pip install pytest pytest-custom_exit_code
+    pytest --suppress-no-test-exit-code --junitxml=../TestResults/test-results.xml 
   displayName: pytest
 
 - task: PublishTestResults@2
