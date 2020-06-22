@@ -35,4 +35,11 @@ steps:
     python -m pip install setuptools wheel
   displayName: 'Install tools'
 
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      print('Hello world 1')
+      print('Hello world 2')
+
 
