@@ -8,6 +8,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+
 strategy:
   matrix:
     Python27:
@@ -28,35 +29,10 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     pip install -r requirements.txt
-    python test_test1.py
   displayName: 'Install dependencies'
 
 - script: 
     python -m pip install setuptools wheel
   displayName: 'Install tools'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    py.test test_test1.py
-  displayName: 'Test with pytest'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFiles: '**/test-*.xml'
-    testRunTitle: 'Publish test results for Python $(python.version)'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
-
-- task: TwineAuthenticate@0
-  inputs:
-    artifactFeed: 'NodeJS'
-    pythonUploadServiceConnection: 'https://pkgs.dev.azure.com/moisesmoreno/Node.JS/_packaging/NodeJS/pypi/simple/'
-
-- script: |
-    twine upload -r "NodeJS --config-file $(PYPIRC_PATH) /upload
 
