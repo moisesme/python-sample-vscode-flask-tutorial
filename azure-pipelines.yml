@@ -51,6 +51,6 @@ steps:
 
 - script: |
     pip install pytest
-    pip install pytest-cov
-    pytest 
+    pytest --version
+    pytest test_test1.py
   displayName: 'Test with pytest'
