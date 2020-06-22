@@ -55,6 +55,16 @@ steps:
     pytest --suppress-no-test-exit-code
   displayName: 'Test with pytest'
 
+- script: 'pip install pytest && pytest Tests/unit_tests --junitxml=../TestResults/test-results.xml && pip install pycmd && py.cleanup Tests/'
+  displayName: pytest
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/test-results.xml'
+  inputs:
+    testResultsFiles: '**/test-results.xml'
+    searchFolder: '$(Common.TestResultsDirectory)'
+    testRunTitle: 'Python Unit tests
+
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
